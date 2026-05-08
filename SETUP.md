@@ -27,6 +27,8 @@ You will see a window with a blinking cursor. This is where you type commands. D
 
 ## Step 2: Set Bash as Your Default Shell
 
+> **Already using bash?** Run `echo $SHELL`. If it prints `/bin/bash`, skip to [Step 3](#step-3-install-homebrew).
+
 Modern Macs use **zsh** as the default shell, but many data science tools, servers, and tutorials assume **bash**. Bash and zsh are very similar, but using bash avoids subtle compatibility issues down the road. We will make bash the default everywhere: in Terminal and in VS Code.
 
 ### 2a. Change the systemwide default
@@ -55,6 +57,8 @@ You will not see that message again.
 ---
 
 ## Step 3: Install Homebrew
+
+> **Already have it?** Run `brew --version`. If it prints a version number, skip to [Step 4](#step-4-install-git-and-github-cli).
 
 Homebrew is a package manager for macOS. It lets you install software from the terminal with a single command instead of hunting for download links on the web. Think of it as an app store that you control from the command line.
 
@@ -88,6 +92,8 @@ You should see something like `Homebrew 4.x.x`. If you see `command not found`, 
 
 ## Step 4: Install Git and GitHub CLI
 
+> **Already have them?** Run `git --version` and `gh --version`. If both print a version number, skip to [Step 5](#step-5-set-up-github-credentials).
+
 **Git** is the tool that tracks changes to your code (version control). The **GitHub CLI** (`gh`) lets you interact with GitHub from your terminal — creating repos, logging in, managing SSH keys, and more.
 
 ```bash
@@ -106,6 +112,8 @@ Both commands should print a version number.
 ---
 
 ## Step 5: Set Up GitHub Credentials
+
+> **Already set up?** Run `gh auth status`. If it says "Logged in to github.com," skip to [Step 6](#step-6-install-vs-code). To also check SSH, run `ssh -T git@github.com` — if it greets you by name, SSH is configured too.
 
 This step connects your computer to your GitHub account so you can upload and download code. There are three parts.
 
@@ -174,6 +182,8 @@ You should see: "Hi username! You've successfully authenticated." If it asks whe
 
 ## Step 6: Install VS Code
 
+> **Already have it?** Run `code --version`. If it prints a version number, skip to [Step 7](#step-7-install-micromamba).
+
 VS Code (Visual Studio Code) is a free IDE (Integrated Development Environment) — a program designed for writing code. It is where you will write code, run Jupyter notebooks, use the terminal, and interact with git, all in a single window.
 
 ```bash
@@ -193,6 +203,8 @@ If you see `command not found: code`, open VS Code manually (from Applications o
 ---
 
 ## Step 7: Install Micromamba
+
+> **Already have it?** Run `micromamba --version`. If it prints a version number, skip to [Step 8](#step-8-clone-this-repository).
 
 Micromamba is an environment manager. It creates isolated "environments" where you can install specific versions of Python, R, and their packages without affecting the rest of your system. This matters because different projects may need different package versions, and environments keep them from interfering with each other.
 
@@ -243,6 +255,8 @@ You should see folders like `data/`, `python/`, `r/`, `scripts/`, plus files lik
 ---
 
 ## Step 9: Create the Environment
+
+> **Already have it?** Run `micromamba env list`. If you see `codingcs` in the list, skip the create step and just activate it: `micromamba activate codingcs`.
 
 This installs Python, R, and all the packages you will need. The list of packages is defined in `environment.yml` — open it in a text editor if you are curious what is in there.
 
@@ -321,6 +335,8 @@ VS Code will open with the project loaded.
 
 ### 10c. Install extensions
 
+> **Already have them?** Run `code --list-extensions` in your terminal. If you see `ms-python.python`, `ms-toolsai.jupyter`, `REditorSupport.r`, and `GitHub.vscode-pull-request-github` in the list, skip this step.
+
 When VS Code opens the workspace, it will suggest installing recommended extensions. Click **"Install All"** when the notification appears. If it does not appear, install them manually:
 
 1. Click the Extensions icon in the left sidebar (it looks like four squares)
@@ -378,6 +394,8 @@ After saving, VS Code will automatically use the correct Python and R from your 
 Both `.vscode/` and `*.code-workspace` are listed in `.gitignore`, so these files stay on your machine and will not be uploaded to GitHub. This is intentional — paths are different on every computer.
 
 ### 10f. Sign in to GitHub from VS Code
+
+> **Already signed in?** Click the **Accounts** icon in the bottom-left corner of VS Code. If it shows your GitHub username, you are already connected and can skip this step.
 
 VS Code has built-in GitHub support that lets you see diffs, create pull requests, and manage your repo without leaving the editor.
 
