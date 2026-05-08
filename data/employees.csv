@@ -1,0 +1,51 @@
+id,name,department,salary,hire_date,city,age
+1,Alice Garcia,Operations,52246.42,2021-01-31,Austin,36
+2,Bob Smith,Engineering,121011.83,2018-12-23,Denver,24
+3,Carlos Johnson,Sales,50306.48,2020-08-10,New York,57
+4,Diana Lee,Engineering,118762.16,2022-09-15,Austin,50
+5,Elena Brown,HR,70600.98,2018-01-27,San Francisco,49
+6,Frank Kim,Marketing,70565.85,2020-05-31,Boston,28
+7,Grace Davis,Sales,81792.0,2022-01-10,Boston,60
+8,Hiro Wilson,Marketing,128784.11,2023-02-25,Chicago,46
+9,Iris Lopez,Sales,100724.47,2022-01-21,Austin,26
+10,James Chen,Sales,112738.97,2021-03-31,Chicago,36
+11,Karen Taylor,Sales,81813.88,2023-02-01,Boston,32
+12,Leo Moore,Marketing,79079.78,2020-12-29,Chicago,60
+13,Maria Clark,Operations,58825.25,2020-09-29,San Francisco,51
+14,Noah Hall,Finance,69694.26,2020-06-18,Boston,25
+15,Olivia Young,Engineering,130398.29,2021-07-16,Denver,39
+16,Paul King,Sales,63208.11,2021-07-12,Austin,53
+17,Quinn Wright,Finance,137315.15,2023-02-23,San Francisco,38
+18,Rosa Hill,Engineering,67129.03,2020-12-12,Denver,59
+19,Sam Scott,Finance,79819.61,2019-07-21,Miami,27
+20,Tina Green,Sales,134721.32,2019-09-19,San Francisco,49
+21,Uma Adams,HR,46988.05,2022-04-13,Miami,55
+22,Victor Baker,Marketing,146818.62,2018-02-17,Chicago,56
+23,Wendy Cruz,Marketing,124545.86,2021-10-25,Chicago,40
+24,Xavier Diaz,Finance,57397.35,2018-01-14,Seattle,54
+25,Yuki Evans,Engineering,95844.98,2019-03-12,Seattle,62
+26,Zara Flores,HR,106986.72,2019-09-19,Boston,32
+27,Amir Gomez,HR,144884.97,2023-12-13,New York,60
+28,Beth Hart,Marketing,93746.63,2019-04-04,Boston,41
+29,Chen Ito,Engineering,46371.77,2018-11-19,Chicago,53
+30,David Jones,Sales,147578.29,2023-12-22,San Francisco,30
+31,Eva Khan,Operations,92281.06,2019-11-08,Seattle,55
+32,Felix Long,HR,86545.17,2020-05-17,Austin,41
+33,Gina Mills,Finance,149466.43,2022-03-10,Miami,55
+34,Hugo Ngo,Finance,53310.46,2020-07-09,Chicago,43
+35,Ivy Ortiz,Sales,104713.96,2020-07-31,Austin,22
+36,Jake Park,Sales,117862.5,2018-08-30,Austin,26
+37,Kira Quinn,Sales,134559.89,2018-10-18,Austin,39
+38,Liam Reed,Operations,93395.59,2019-06-26,Miami,37
+39,Mia Stone,Finance,128824.67,2020-02-19,Chicago,28
+40,Nate Tran,Operations,87415.63,2022-10-01,Denver,51
+41,Ola Ueda,Operations,45958.83,2019-02-08,New York,47
+42,Pete Vega,Operations,77323.29,2019-03-24,Austin,34
+43,Rita Wang,Engineering,98991.43,2019-07-29,Denver,33
+44,Sean Xu,Marketing,90889.09,2018-11-05,Miami,57
+45,Tara Yang,Sales,45564.72,2018-03-02,Chicago,37
+46,Uri Zhou,Engineering,84705.55,2023-05-26,Austin,47
+47,Vera Ali,Sales,58110.08,2018-01-09,Denver,38
+48,Will Bell,Finance,71377.42,2023-06-17,San Francisco,34
+49,Xia Cole,Marketing,63947.1,2018-08-28,New York,42
+50,Yara Dean,Sales,45515.66,2023-05-07,San Francisco,25

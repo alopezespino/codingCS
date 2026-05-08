@@ -1,0 +1,35 @@
+name: codingcs
+channels:
+  - conda-forge
+dependencies:
+  # Python
+  - python >=3.11
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - jupyterlab
+  - ipykernel
+  - nbconvert
+
+  # Big data — Python
+  - pyspark
+  - dask
+  - python-duckdb
+  - pyarrow
+
+  # Java (required by Spark)
+  - openjdk
+
+  # R
+  - r-base
+  - r-tidyverse
+  - r-arrow
+  - r-sparklyr
+  - r-ggplot2
+  - r-irkernel
+  - r-duckdb
+  - r-dbi
+  - r-dbplyr
+  - r-knitr
+  - r-rmarkdown

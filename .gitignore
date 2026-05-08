@@ -1,0 +1,11 @@
+data/sales_large.csv
+.ipynb_checkpoints/
+__pycache__/
+.DS_Store
+*.pyc
+.Rhistory
+.RData
+.Rproj.user/
+spark-warehouse/
+derby.log
+metastore_db/
