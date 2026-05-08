@@ -217,4 +217,5 @@ The `python/` and `r/` folders each contain the same progression of topics. You 
 2. **Start with the basics:** Open `python/01-python-basics.ipynb` or `r/01-r-basics.ipynb`.
 3. **Work your way up:** The notebooks are numbered in the order you should tackle them.
 4. **Organize your work:** Read [GITHUB-PROJECTS.md](GITHUB-PROJECTS.md) to learn how to track tasks, milestones, and progress with GitHub Projects.
-5. **Experiment:** Change the code, break things, fix them. That is how you learn.
+5. **Contribute:** Found a mistake or have a suggestion? Read [CONTRIBUTING.md](CONTRIBUTING.md) to learn how to open issues and pull requests.
+6. **Experiment:** Change the code, break things, fix them. That is how you learn.
