@@ -40,7 +40,7 @@ You do not need to abandon the GUI. Most of your day-to-day computing will still
 
 On a Mac, the terminal application is simply called **Terminal**. You can find it in `Applications > Utilities > Terminal`, or by pressing `Cmd + Space` and typing "Terminal." When you open it, you will see a window with a text prompt — something like `yourname@MacBook ~ %`. This is where you type commands.
 
-The language that the terminal understands is called a **shell**. On modern Macs, the default shell is **zsh** (Z shell). On older Macs and most Linux systems it is **bash** (Bourne Again Shell). For our purposes, zsh and bash are nearly identical — the commands you will learn work in both. When people say "bash commands," they usually mean "shell commands" in general.
+The language that the terminal understands is called a **shell**. On modern Macs, the default shell is **zsh** (Z shell). On older Macs and most Linux systems it is **bash** (Bourne Again Shell). For our purposes, zsh and bash are nearly identical — the commands you will learn work in both. When people say "bash commands," they usually mean "shell commands" in general. In this repo we use **bash** as our standard shell because it is the most widely used shell in data science environments, remote servers, and tutorials. The [SETUP.md](SETUP.md) guide walks you through switching your Mac to bash.
 
 Here are the commands you will use most often:
 
@@ -66,6 +66,8 @@ One powerful feature of the terminal is that commands can be **chained** and **s
 An **IDE** (Integrated Development Environment) is a program designed for writing code. You could write code in any text editor — even TextEdit or Notepad — but an IDE gives you tools that make the process dramatically easier: syntax highlighting (coloring your code so it is easier to read), auto-completion (suggesting what you might type next), error detection (underlining mistakes before you run anything), and built-in access to the terminal.
 
 **VS Code** (Visual Studio Code) is a free, open-source IDE made by Microsoft. It has become the most widely used code editor in the world for a few reasons: it is lightweight, it works on Mac, Windows, and Linux, and it supports an enormous library of **extensions** — small add-ons that customize it for specific languages and tasks. For data analysis, the extensions for Python, R, and Jupyter notebooks are especially useful. You will be able to write code, run notebooks, manage files, and use the terminal all within a single window.
+
+VS Code organizes your work through **workspace files** and **settings files**. A workspace file (`.code-workspace`) tells VS Code which folders belong to your project and can store shared preferences like recommended extensions. A settings file (`.vscode/settings.json`) holds machine-specific configuration like the path to your Python interpreter. Both are local to your computer and not shared through git, because paths differ from one machine to another. The [SETUP.md](SETUP.md) guide walks you through creating both.
 
 You do not need to memorize every feature of VS Code right away. Start by using it to open files and run notebooks. Over time, you will naturally discover shortcuts and features that speed up your work.
 
@@ -181,7 +183,6 @@ codingCS/
 ├── README.md                 <- You are here
 ├── SETUP.md                  <- Step-by-step installation and setup guide
 ├── environment.yml           <- Environment specification (Python + R + big data tools)
-├── codingCS.code-workspace   <- VS Code workspace file
 ├── data/
 │   ├── README.md             <- Dataset descriptions
 │   ├── employees.csv         <- 50-row synthetic employee dataset

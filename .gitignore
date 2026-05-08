@@ -9,3 +9,5 @@ __pycache__/
 spark-warehouse/
 derby.log
 metastore_db/
+.vscode/
+*.code-workspace
