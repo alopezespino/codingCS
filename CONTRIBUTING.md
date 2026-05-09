@@ -142,6 +142,8 @@ Or to stage everything you changed:
 git add -A
 ```
 
+`git add -A` stages everything that is not listed in `.gitignore`. Run `git status` first to make sure you are not staging files you did not intend to commit.
+
 ### Step 6: Commit
 
 A **commit** saves a snapshot of your staged changes with a short message describing what you did.

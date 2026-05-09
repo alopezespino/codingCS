@@ -11,6 +11,7 @@ dependencies:
   - jupyterlab
   - ipykernel
   - nbconvert
+  - tabulate
 
   # Big data — Python
   - pyspark
@@ -19,7 +20,7 @@ dependencies:
   - pyarrow
 
   # Java (required by Spark)
-  - openjdk
+  - openjdk >=17,<22
 
   # R
   - r-base
@@ -28,7 +29,6 @@ dependencies:
   - r-sparklyr
   - r-ggplot2
   - r-irkernel
-  - r-duckdb
   - r-dbi
   - r-dbplyr
   - r-knitr

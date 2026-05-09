@@ -11,3 +11,6 @@ derby.log
 metastore_db/
 .vscode/
 *.code-workspace
+python/hello.py
+r/hello.R
+*.claude/

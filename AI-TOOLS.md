@@ -11,13 +11,13 @@ This guide introduces Claude Code, explains how to integrate it into your workfl
 1. [Why People Fear AI Tools (And Why That Fear Is Mostly Misplaced)](#1-why-people-fear-ai-tools)
 2. [Augmentation vs. Automation](#2-augmentation-vs-automation)
 3. [What Is Claude Code?](#3-what-is-claude-code)
-4. [Installing Claude Code](#4-installing-claude-code)
+4. [Why the Terminal Beats the Chat Window](#4-why-the-terminal-beats-the-chat-window)
 5. [How It Works: The Approval Loop](#5-how-it-works-the-approval-loop)
 6. [Permission Modes: Choosing Your Level of Control](#6-permission-modes-choosing-your-level-of-control)
 7. [Staying in the Loop: Reviewing Before Accepting](#7-staying-in-the-loop-reviewing-before-accepting)
 8. [Practical Examples: Where AI Helps Most](#8-practical-examples-where-ai-helps-most)
 9. [The Ethics Guardrail](#9-the-ethics-guardrail)
-10. [Getting Started](#10-getting-started)
+10. [Using Claude Code with This Tutorial](#10-using-claude-code-with-this-tutorial)
 
 ---
 
@@ -81,34 +81,29 @@ Claude Code is a command-line AI assistant made by Anthropic. It runs in your te
 
 It works as a conversation. You describe what you need in plain language, and Claude proposes actions — edits to files, commands to run, explanations of concepts. Critically, **you approve every action before it happens.** Claude does not silently change your files or run commands behind your back.
 
+For installation instructions, see [SETUP.md](SETUP.md).
+
 ---
 
-## 4. Installing Claude Code
+## 4. Why the Terminal Beats the Chat Window
 
-### In the terminal (standalone)
+With a chat window (ChatGPT, Claude on the web, or any AI sidebar panel), working with your code means constant copy-pasting: the error into the chat, then the code the AI asks to see, then the imports, then the fix back into your editor — only to discover the AI was missing context from another file, so you start over. You spend more time shuttling text between windows than thinking about the problem.
 
-```bash
-brew install claude-code
-```
+Claude Code in the terminal skips all of that. When you run `claude` inside your project folder, it is **already aware of your entire project** — every file, every folder, every configuration. It reads whatever it needs, navigates your project structure, checks your git history, and runs your code, all without you copying a single line. Its suggestions are more accurate because it does not have to guess your variable names, your imports, or your file layout — it can look.
 
-After installation, navigate to any project folder and type:
+### Pointing Claude at what matters
 
-```bash
-claude
-```
+**The `@` shortcut.** Type `@` followed by a file or directory path to add it as context:
 
-This starts an interactive session. Claude reads your project files and is ready to help.
+- `@data/sales.csv` — "Look at this dataset"
+- `@python/01-python-basics.ipynb` — "Explain what this notebook does"
+- `@environment.yml` — "Add seaborn to my dependencies"
 
-### In VS Code (extension)
+**Project documentation.** README files and other documentation in your project are not just for humans — Claude reads them too. A well-written README helps Claude understand what your project does, how it is organized, and what conventions it follows. This means better answers with less back-and-forth. If your project lacks documentation, consider adding some — the investment pays off for both human and AI readers.
 
-1. Open VS Code
-2. Go to Extensions (click the four-squares icon in the sidebar)
-3. Search for **"Claude Code"**
-4. Click Install
+### When to use the chat window
 
-Once installed, you can open the Claude panel from the sidebar or with the keyboard shortcut shown in the extension description.
-
-The VS Code integration is particularly powerful because Claude sees your files in context, and proposed edits appear as diffs directly in the editor — you can review exactly what will change, line by line, with syntax highlighting, before accepting.
+Chat interfaces are fine for standalone questions that do not involve your files — asking about a concept, comparing two libraries, or getting a formula explained. But the moment your question involves your actual project, the terminal is the better tool.
 
 ---
 
@@ -146,22 +141,6 @@ Claude Code has multiple permission modes that let you dial the level of autonom
 | **Auto Mode** | Most actions, with background safety checks | Repetitive tasks where you have verified the pattern |
 
 **Start with Default mode.** It requires you to approve everything, which means you see and understand every change. As you build trust and familiarity, you can relax the controls. But you are never locked in — you can tighten permissions at any time.
-
-### Fine-grained permissions
-
-Beyond modes, you can set permanent rules about what Claude can and cannot do:
-
-```json
-{
-  "permissions": {
-    "allow": ["Bash(git status)", "Bash(python *)"],
-    "deny": ["Bash(rm *)"],
-    "ask": ["Edit(data/**)"]
-  }
-}
-```
-
-This example says: always allow git status and python commands; never allow delete commands; always ask before editing anything in the data folder. Rules are evaluated in order: deny always wins.
 
 ---
 
@@ -218,7 +197,7 @@ These are operational tasks that are not your core analytical work but consume t
 | Set up a new environment | 30 min reading docs, trial and error | "Create an environment.yml with pandas, pyspark, and seaborn" — 10 seconds |
 | Write a .gitignore | Google examples, copy-paste, customize | "Generate a .gitignore for a Python data analysis project" — 5 seconds |
 | Format a table for a report | Manual markdown formatting | "Format this dataframe output as a markdown table" — 5 seconds |
-| Debug a cryptic error | Google the error, read 5 Stack Overflow threads | Paste the error, get a targeted explanation and fix — 30 seconds |
+| Debug a cryptic error | Google the error, read 5 Stack Overflow threads | Describe the error using references that help Claude find it quickly — 30 seconds |
 | Write a commit message | Stare at the diff, summarize in your head | Claude reads the diff and drafts a message — 5 seconds |
 | Draft a README | Start from a blank page | "Draft a README based on the files in this project" — 30 seconds, then you revise |
 
@@ -268,9 +247,19 @@ The goal is not to avoid AI. The goal is to use it in a way that makes you more 
 
 ---
 
-## 10. Getting Started
+## 10. Using Claude Code with This Tutorial
 
-Here is how to begin using Claude Code with this repository:
+Everything above applies to Claude Code in general — any project, any language. This section is specific to working with the notebooks in this repository. Make sure Claude Code is installed before continuing (see [SETUP.md](SETUP.md), Step 11).
+
+### Referencing notebook cells
+
+After you run a cell, Jupyter assigns it an execution number — the `In[X]` label shown to the left. You can use these labels to point Claude at a specific cell without it having to read the entire notebook:
+
+- "Explain what `In[7]` does"
+- "The error is in `In[12]` — what went wrong?"
+- "Rewrite `In[3]` to use a list comprehension instead"
+
+These numbers only appear after a cell has been run, so run your notebook (or at least the relevant cells) before referencing them.
 
 ### First session: explore
 
@@ -289,11 +278,11 @@ You are in Default mode. Claude will read your files (with your approval) and ex
 
 ### Second session: get help with a notebook
 
-Open a notebook in VS Code. If you hit a cell that confuses you or throws an error:
+Open one of the course notebooks in VS Code. Run the cells so they get execution numbers, then use those to ask targeted questions:
 
-- "This cell throws a NameError. Why?"
-- "I don't understand what .groupby().agg() does. Explain it with this data."
-- "Rewrite this cell to also include the median, not just the mean"
+- "In[4] throws a NameError. Why?"
+- "I don't understand what .groupby().agg() does in In[12]. Explain it with this data."
+- "Rewrite In[8] to also include the median, not just the mean"
 
 Review the proposed change in the diff view. Accept if it looks right. Ask for explanation if it doesn't.
 

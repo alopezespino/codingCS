@@ -41,7 +41,7 @@ chsh -s /bin/bash
 
 It will ask for your Mac password. Type it and press Enter (nothing appears on screen while you type — that is normal).
 
-Now **close Terminal completely** (Cmd + Q, not just closing the window) and **reopen it**. Your prompt should now end with `$` instead of `%`. That confirms you are in bash.
+Now **close Terminal completely** (Cmd + Q, not just closing the window) and **reopen it**. Your **prompt** — the short text the terminal displays while waiting for your next command — should now end with `$` instead of `%`. That confirms you are in bash.
 
 ### 2b. Silence the zsh warning
 
@@ -70,7 +70,7 @@ Paste this into your terminal and press Enter:
 
 It will ask for your Mac password again. Type it and press Enter.
 
-**Important — add Homebrew to your PATH.** After installation finishes, Homebrew will print instructions. For Apple Silicon Macs, run these commands:
+**Important — add Homebrew to your PATH.** Your PATH is an **environment variable** (a system-wide setting stored as text) that lists the locations your terminal checks when you type a command. Adding Homebrew to it lets you type `brew` from anywhere. After installation finishes, Homebrew will print instructions. For Apple Silicon Macs, run these commands:
 
 ```bash
 echo >> ~/.bash_profile
@@ -92,9 +92,11 @@ You should see something like `Homebrew 4.x.x`. If you see `command not found`, 
 
 ## Step 4: Install Git and GitHub CLI
 
+> **Just want the notebooks?** If you want to start coding right away without learning git, you can download this repo as a ZIP file from GitHub (click the green **Code** button, then **Download ZIP**), unzip it into `~/Documents/codingCS`, and skip to [Step 6](#step-6-install-vs-code). You will be able to run every notebook. However, we recommend following Steps 4–5 — git is one of the tools this repo teaches, and you will need it for the later guides on contributing and starting your own projects.
+
 > **Already have them?** Run `git --version` and `gh --version`. If both print a version number, skip to [Step 5](#step-5-set-up-github-credentials).
 
-**Git** is the tool that tracks changes to your code (version control). The **GitHub CLI** (`gh`) lets you interact with GitHub from your terminal — creating repos, logging in, managing SSH keys, and more.
+**Git** is the tool that tracks changes to your code (version control). The **GitHub CLI** (`gh`) lets you interact with GitHub from your terminal — creating repos, logging in, and more.
 
 ```bash
 brew install git gh
@@ -113,9 +115,9 @@ Both commands should print a version number.
 
 ## Step 5: Set Up GitHub Credentials
 
-> **Already set up?** Run `gh auth status`. If it says "Logged in to github.com," skip to [Step 6](#step-6-install-vs-code). To also check SSH, run `ssh -T git@github.com` — if it greets you by name, SSH is configured too.
+> **Already set up?** Run `gh auth status`. If it says "Logged in to github.com," skip to [Step 6](#step-6-install-vs-code).
 
-This step connects your computer to your GitHub account so you can upload and download code. There are three parts.
+This step connects your computer to your GitHub account so you can upload and download code. There are two parts.
 
 ### 5a. Tell git who you are
 
@@ -144,39 +146,6 @@ This starts an interactive login. Here is what to choose at each prompt:
 A one-time code will appear in your terminal. Press Enter, and your browser will open. Paste the code into the browser page and authorize access.
 
 When you see "Successfully logged in" in your terminal, you are done. You can now push and pull code using HTTPS.
-
-### 5c. Set up an SSH key (recommended for long-term use)
-
-SSH keys let your computer authenticate with GitHub automatically without entering a code each time. This is optional right now — the HTTPS login from Step 5b already works — but it is worth setting up.
-
-Generate a new SSH key (replace the email with yours):
-
-```bash
-ssh-keygen -t ed25519 -C "your.email@example.com"
-```
-
-When it asks where to save the key, press Enter to accept the default location. When it asks for a passphrase, you can press Enter twice to skip it (or set one for extra security).
-
-Start the SSH agent and add your key:
-
-```bash
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
-```
-
-Upload the key to your GitHub account:
-
-```bash
-gh ssh-key add ~/.ssh/id_ed25519.pub --title "My MacBook"
-```
-
-**Verify the SSH connection:**
-
-```bash
-ssh -T git@github.com
-```
-
-You should see: "Hi username! You've successfully authenticated." If it asks whether to continue connecting, type `yes` and press Enter.
 
 ---
 
@@ -250,7 +219,7 @@ Let's confirm everything is there:
 ls
 ```
 
-You should see folders like `data/`, `python/`, `r/`, `scripts/`, plus files like `README.md`, `SETUP.md`, and `environment.yml`.
+You should see folders like `data/`, `python/`, `r/`, `scripts/`, plus files like [README.md](README.md), [SETUP.md](SETUP.md), and [environment.yml](environment.yml).
 
 ---
 
@@ -258,13 +227,13 @@ You should see folders like `data/`, `python/`, `r/`, `scripts/`, plus files lik
 
 > **Already have it?** Run `micromamba env list`. If you see `codingcs` in the list, skip the create step and just activate it: `micromamba activate codingcs`.
 
-This installs Python, R, and all the packages you will need. The list of packages is defined in `environment.yml` — open it in a text editor if you are curious what is in there.
+This installs Python, R, and all the packages you will need. The list of packages is defined in [environment.yml](environment.yml) — open it in a text editor if you are curious what is in there.
 
 ```bash
-micromamba create -f environment.yml
+micromamba create -y -f environment.yml
 ```
 
-This may take several minutes. It is downloading and installing a lot of software. Let it finish.
+The `-y` flag tells micromamba to proceed without asking for confirmation. This may take several minutes — it is downloading and installing a lot of software. Let it finish.
 
 Once it is done, activate the environment:
 
@@ -275,6 +244,16 @@ micromamba activate codingcs
 Your terminal prompt should now show `(codingcs)` at the beginning of the line. This means you are inside the environment and all the tools (Python, R, Spark, etc.) are available.
 
 **You need to activate the environment every time you open a new terminal window.** Just run `micromamba activate codingcs` again.
+
+### 9a. Register the R kernel for VS Code
+
+The Python kernel (`ipykernel`) is automatically discovered by VS Code, but the R kernel (`IRkernel`) needs to be registered manually so VS Code can find it. With your environment still active, run:
+
+```bash
+Rscript -e 'IRkernel::installspec(name = "codingcs-r", displayname = "R (codingcs)")'
+```
+
+This registers the R kernel in your user-level Jupyter directory, where VS Code always looks. Without this step, the R kernel will not appear in VS Code's kernel picker.
 
 ---
 
@@ -298,7 +277,9 @@ They will print paths like `/Users/yourname/micromamba/envs/codingcs/bin/python`
 
 ### 10b. Create a VS Code workspace file
 
-A **workspace file** tells VS Code which folders belong to your project and can store shared settings. Create one in the repo root:
+A **workspace file** tells VS Code which folders belong to your project and can store shared settings. Create one in the repo root.
+
+The command below uses a `cat > filename << 'EOF'` pattern — it creates a file containing everything between the two `EOF` markers. Just paste the whole block into your terminal and press Enter.
 
 ```bash
 cat > codingCS.code-workspace << 'EOF'
@@ -331,7 +312,7 @@ code codingCS.code-workspace
 
 VS Code will open with the project loaded.
 
-**Why is this file gitignored?** The workspace file can contain machine-specific paths (like where your Python is installed), and those differ from person to person. Each person creates their own. The repository's `.gitignore` file excludes `*.code-workspace` so it stays local.
+**Why is this file gitignored?** The workspace file can contain machine-specific paths (like where your Python is installed), and those differ from person to person. Each person creates their own. The repository's [.gitignore](.gitignore) file excludes `*.code-workspace` so it stays local.
 
 ### 10c. Install extensions
 
@@ -352,6 +333,23 @@ VS Code has its own built-in terminal. By default it may use zsh. To make it use
 
 ```json
 "terminal.integrated.defaultProfile.osx": "bash"
+```
+
+If your file is empty or has just `{}`, the result should look like this:
+
+```json
+{
+    "terminal.integrated.defaultProfile.osx": "bash"
+}
+```
+
+If there are already other settings, add a comma after the last one and put the new line before the closing brace:
+
+```json
+{
+    "editor.fontSize": 14,
+    "terminal.integrated.defaultProfile.osx": "bash"
+}
 ```
 
 4. Save the file (`Cmd + S`)
@@ -391,7 +389,7 @@ EOF
 
 After saving, VS Code will automatically use the correct Python and R from your `codingcs` environment whenever you open this project.
 
-Both `.vscode/` and `*.code-workspace` are listed in `.gitignore`, so these files stay on your machine and will not be uploaded to GitHub. This is intentional — paths are different on every computer.
+Both `.vscode/` and `*.code-workspace` are listed in [.gitignore](.gitignore), so these files stay on your machine and will not be uploaded to GitHub. This is intentional — paths are different on every computer.
 
 ### 10f. Sign in to GitHub from VS Code
 
@@ -408,7 +406,43 @@ You can verify by clicking the Source Control icon in the left sidebar (it looks
 
 ---
 
-## Step 11: Generate the Large Dataset
+## Step 11: Install Claude Code
+
+> **Already have it?** Run `claude --version`. If it prints a version number, skip to [Step 12](#step-12-generate-the-large-dataset).
+
+Claude Code is an AI coding assistant that runs in your terminal. It can read your project files, explain code, help debug errors, and propose edits — all from the command line. See [AI-TOOLS.md](AI-TOOLS.md) for a full guide on how and why to use it.
+
+### 11a. Install from Homebrew
+
+```bash
+brew install claude-code
+```
+
+### 11b. Install the VS Code extension
+
+1. Open VS Code
+2. Go to Extensions (click the four-squares icon in the sidebar)
+3. Search for **"Claude Code"**
+4. Click Install
+
+### 11c. Start a session
+
+There are two ways to launch Claude Code — both use the terminal interface:
+
+- **From any terminal:** navigate to your project folder and run `claude`.
+- **From VS Code:** open the integrated terminal and run `claude`, or open the Command Palette (`Cmd+Shift+P`) and search for **"Claude Code: Open in Terminal"**.
+
+**Important:** clicking the Claude sparkle icon (✳) in the VS Code sidebar opens a chat-style panel. This is a different mode — I do not recommend it. It lacks the full project awareness that makes Claude Code powerful. Always use the terminal mode.
+
+**Verify:**
+
+```bash
+claude --version
+```
+
+---
+
+## Step 12: Generate the Large Dataset
 
 The big data notebooks need a larger dataset to demonstrate tools like PySpark, Dask, and DuckDB. This script generates 100,000 rows of synthetic sales data.
 
@@ -418,27 +452,33 @@ Make sure your environment is active (`(codingcs)` in your prompt), then run:
 python scripts/generate_large_data.py
 ```
 
-This creates `data/sales_large.csv`. The file is listed in `.gitignore` so it will not be uploaded to GitHub — everyone generates their own copy locally.
+You can open [scripts/generate_large_data.py](scripts/generate_large_data.py) in VS Code if you are curious how it works.
+
+This creates `data/sales_large.csv`. The file is listed in [.gitignore](.gitignore) so it will not be uploaded to GitHub — everyone generates their own copy locally.
 
 ---
 
-## Step 12: Verify Everything Works
+## Step 13: Verify Everything Works
 
 Let's make sure Python and R are both working inside VS Code.
 
+Every Jupyter notebook needs a **kernel** — the engine that runs your code. Your `codingcs` environment already includes the kernel packages (`ipykernel` for Python, `IRkernel` for R), so both should be available. You just need to select the right one when you open a notebook.
+
 ### Test Python
 
-1. In VS Code, open `python/01-python-basics.ipynb`
-2. VS Code will ask you to select a kernel. Click **"Select Kernel"** in the top right
-3. Choose **"Python Environments"** and then select the one that says `codingcs`
+1. In VS Code, open [python/01-python-basics.ipynb](python/01-python-basics.ipynb)
+2. Look at the top right corner of the editor. You may see **"Select Kernel"**, **"Detecting Kernels"** (with a spinning arrows icon), or a kernel that was automatically selected. If it says "Detecting Kernels," wait a few seconds for it to finish. Then click the button and select a kernel
+3. Choose **"Python Environments"** and then select the one that says `codingcs` — this ensures the notebook uses the Python from your environment, with all the libraries already installed
 4. Click the play button on the first code cell
 5. If it runs without errors, Python is set up correctly
 
+If you see multiple Python options, pick the one whose path includes `codingcs`. The others are system Pythons that do not have the libraries you need.
+
 ### Test R
 
-1. Open `r/01-r-basics.ipynb`
+1. Open [r/01-r-basics.ipynb](r/01-r-basics.ipynb)
 2. Click **"Select Kernel"** in the top right
-3. Choose the **R** kernel (it may be labeled `IR` or `R`)
+3. Click **"Select Another Kernel"**, then **"Jupyter Kernel"**, and choose **"R (codingcs)"** — this is the kernel you registered in Step 9a. If it does not appear in the list, click the **refresh icon** (circular arrows) to the right of "Select a Jupyter Kernel" to rescan available kernels
 4. Run the first cell
 5. If it runs without errors, R is set up correctly
 
@@ -448,13 +488,14 @@ Let's make sure Python and R are both working inside VS Code.
 2. You should see a bash prompt (ending with `$`)
 3. Run `micromamba activate codingcs` and then `python --version` — it should print a Python 3.x version
 
-If all three work, you are ready to go. Start with notebook `01` in either the `python/` or `r/` folder and work your way through the numbers.
+If all three work, you are ready to go. Before diving into the notebooks, read [AI-TOOLS.md](AI-TOOLS.md) to learn how to use Claude Code as a companion while you work. Then start with notebook `01` in either the `python/` or `r/` folder and work your way through the numbers.
 
 ---
 
 ## Troubleshooting
 
-**"command not found: brew"**
+### "command not found: brew"
+
 Homebrew was installed but your terminal does not know where it is. Run:
 
 ```bash
@@ -462,39 +503,36 @@ echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
-**"command not found: micromamba"**
+### "command not found: micromamba"
+
 You need to restart your terminal after running `micromamba shell init`. Close the Terminal window completely (Cmd + Q) and open a new one.
 
-**My terminal still shows `%` instead of `$` after changing the shell**
-The `chsh` command requires a full logout to take effect. Close Terminal completely (Cmd + Q), reopen it, and check:
+### My terminal still shows `%` instead of `$` after changing the shell
 
-```bash
-echo $SHELL
-```
+The `chsh` command requires a full logout to take effect. Close Terminal completely (Cmd + Q), reopen it, and run `echo $SHELL`. It should print `/bin/bash`. If it still shows `/bin/zsh`, try logging out of your Mac entirely and logging back in.
 
-It should print `/bin/bash`. If it still shows `/bin/zsh`, try logging out of your Mac entirely and logging back in.
+### The Python kernel does not appear in VS Code
 
-**The kernel does not appear in VS Code**
 Make sure the `codingcs` environment is activated in your terminal (`micromamba activate codingcs`) and that you opened VS Code from that same terminal using `code codingCS.code-workspace`. Also confirm that the Jupyter extension is installed.
 
-**Spark errors or "java not found"**
-Spark requires Java. It should have been installed as part of the environment (the `openjdk` package). Verify with:
+### The R kernel does not appear in VS Code
 
-```bash
-java -version
-```
+Make sure you ran the `IRkernel::installspec()` command from Step 9a. If you skipped it or it failed, activate the environment and run it again: `Rscript -e 'IRkernel::installspec(name = "codingcs-r", displayname = "R (codingcs)")'`. The R kernel appears under **"Select Another Kernel" → "Jupyter Kernel"**, not under "Python Environments."
 
-If nothing shows up, run `micromamba install -n codingcs openjdk` and try again.
+### Spark errors or "java not found"
 
-**"Permission denied" when pushing to GitHub**
+Spark requires Java, which should have been installed as part of the environment (the `openjdk` package). Verify with `java -version`. If nothing shows up, run `micromamba install -n codingcs openjdk` and try again.
+
+### "Permission denied" when pushing to GitHub
+
 Your authentication may have expired. Run `gh auth login` again and follow the prompts.
 
-**VS Code does not recognize my Python/R path**
-Open `.vscode/settings.json` and make sure the paths match the output of `which python` and `which R` from inside your activated environment. After editing, reload VS Code (Cmd + Shift + P, then "Developer: Reload Window").
+### VS Code does not recognize my Python/R path
 
-**Environment creation is very slow or fails**
-Make sure you have a stable internet connection. If a specific package fails, try creating the environment without it and installing it separately:
+Open `.vscode/settings.json` and make sure the paths match the output of `which python` and `which R` from inside your activated environment. After editing, reload VS Code (`Cmd + Shift + P`, then "Developer: Reload Window").
 
-```bash
-micromamba install -n codingcs <package-name>
-```
+### Environment creation is very slow or fails
+
+Make sure you have a stable internet connection. If a specific package fails, try creating the environment without it and installing it separately: `micromamba install -n codingcs <package-name>`.
+
+If your issue is not listed here, try running `claude` in your terminal and describing the problem — Claude Code can read your configuration files, check error messages, and help you troubleshoot directly.

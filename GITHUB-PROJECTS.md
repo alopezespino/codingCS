@@ -85,12 +85,6 @@ You can create a project from your GitHub profile or from a repository.
    - **Roadmap** — timeline view (good for deadline-driven work)
 5. Give it a name (e.g., "Internship Data Analysis") and click **Create**
 
-**From the command line** (using the GitHub CLI you installed):
-
-```bash
-gh project create --title "Internship Data Analysis" --owner @me
-```
-
 ---
 
 ## 5. Views: Board, Table, and Roadmap

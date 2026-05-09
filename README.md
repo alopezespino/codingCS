@@ -2,25 +2,27 @@
 
 This repository is a self-paced introduction to the tools you will use as a data analyst or data scientist. It is designed for someone who has never programmed before and is working on a Mac. By the time you finish, you will understand the software ecosystem that powers modern data work, and you will have hands-on practice with Python, R, and several big data technologies.
 
-Everything here is structured so you can learn by doing. Read this guide first to understand what each tool is and why it exists, then follow [SETUP.md](SETUP.md) to install everything, and finally work through the notebooks at your own pace.
+Everything here is structured so you can learn by doing. Read this guide first to understand what each tool is and why it exists, then follow [SETUP.md](SETUP.md) to install everything you need. Before starting the notebooks, read [AI-TOOLS.md](AI-TOOLS.md) to learn how to use Claude Code as an AI companion while you work with this repository — it will help you debug errors, understand code, and move through the material faster.
 
 ---
 
 ## Table of Contents
 
-1. [GUI vs Terminal](#1-gui-vs-terminal)
-2. [The Terminal and Bash](#2-the-terminal-and-bash)
-3. [IDE and VS Code](#3-ide-and-vs-code)
-4. [Homebrew](#4-homebrew)
-5. [Git and Version Control](#5-git-and-version-control)
-6. [GitHub](#6-github)
-7. [Environments, Libraries, and Packages](#7-environments-libraries-and-packages)
-8. [Micromamba](#8-micromamba)
-9. [Jupyter Notebooks](#9-jupyter-notebooks)
-10. [Servers in the Jupyter and Spark Context](#10-servers-in-the-jupyter-and-spark-context)
-11. [Putting It All Together](#11-putting-it-all-together)
-12. [What's in This Repo](#whats-in-this-repo)
-13. [Next Steps](#next-steps)
+- [codingCS: Getting Started with Data Analysis Tools](#codingcs-getting-started-with-data-analysis-tools)
+  - [Table of Contents](#table-of-contents)
+  - [1. GUI vs Terminal](#1-gui-vs-terminal)
+  - [2. The Terminal and Bash](#2-the-terminal-and-bash)
+  - [3. IDE and VS Code](#3-ide-and-vs-code)
+  - [4. Homebrew](#4-homebrew)
+  - [5. Git and Version Control](#5-git-and-version-control)
+  - [6. GitHub](#6-github)
+  - [7. Environments, Libraries, and Packages](#7-environments-libraries-and-packages)
+  - [8. Micromamba](#8-micromamba)
+  - [9. Jupyter Notebooks](#9-jupyter-notebooks)
+  - [10. Servers in the Jupyter and Spark Context](#10-servers-in-the-jupyter-and-spark-context)
+  - [11. Putting It All Together](#11-putting-it-all-together)
+  - [What's in This Repo](#whats-in-this-repo)
+  - [Next Steps](#next-steps)
 
 ---
 
@@ -41,6 +43,8 @@ You do not need to abandon the GUI. Most of your day-to-day computing will still
 On a Mac, the terminal application is simply called **Terminal**. You can find it in `Applications > Utilities > Terminal`, or by pressing `Cmd + Space` and typing "Terminal." When you open it, you will see a window with a text prompt — something like `yourname@MacBook ~ %`. This is where you type commands.
 
 The language that the terminal understands is called a **shell**. On modern Macs, the default shell is **zsh** (Z shell). On older Macs and most Linux systems it is **bash** (Bourne Again Shell). For our purposes, zsh and bash are nearly identical — the commands you will learn work in both. When people say "bash commands," they usually mean "shell commands" in general. In this repo we use **bash** as our standard shell because it is the most widely used shell in data science environments, remote servers, and tutorials. The [SETUP.md](SETUP.md) guide walks you through switching your Mac to bash.
+
+In the terminal, folders are called **directories** — the two words mean the same thing.
 
 Here are the commands you will use most often:
 
@@ -95,7 +99,7 @@ A few key terms:
 
 - **Repository (repo):** A project folder that git is tracking. This folder, `codingCS`, is a repository.
 - **Commit:** A saved snapshot of your changes, with a short message describing what you did (e.g., "add visualization notebook").
-- **Branch:** A parallel line of work. You might create a branch to experiment with something, and if it works, you **merge** it back into the main branch.
+- **Branch:** A parallel line of work. You might create a branch to experiment with something, and if it works, you **merge** (combine your changes into) the main branch.
 - **Remote:** A copy of your repository stored somewhere else (usually on GitHub). This is how you share work and back it up.
 
 Git is not just for software engineers. Data analysts use it to track changes to their code, their notebooks, and their data pipelines. When you work on a team, git makes it possible for two people to edit different parts of the same project without overwriting each other's work.
@@ -108,13 +112,13 @@ Git is not just for software engineers. Data analysts use it to track changes to
 
 When you **push** your commits to GitHub, your code is backed up in the cloud and accessible from any computer. When a collaborator **pulls** your changes, they get your latest work. GitHub also provides tools for code review, issue tracking, and project management, which is why it has become the standard platform for collaborative coding in both industry and academia.
 
-To connect your computer to GitHub, you will set up credentials so that git knows who you are. This involves creating a GitHub account, generating an SSH key (a secure identity file on your Mac), and telling GitHub about it. We cover this step-by-step in [SETUP.md](SETUP.md).
+To connect your computer to GitHub, you will set up credentials (login information) so that git knows who you are. This involves creating a GitHub account and logging in through the terminal. We cover this step-by-step in [SETUP.md](SETUP.md).
 
 ---
 
 ## 7. Environments, Libraries, and Packages
 
-When you write code in Python or R, you rarely start from scratch. Other people have already written code to read CSV files, do statistical analysis, create charts, and process big data. These collections of pre-written code are called **libraries** (in Python) or **packages** (in R), though the two words are often used interchangeably.
+When you write code in Python or R, you rarely start from scratch. Other people have already written code to read **CSV** (Comma-Separated Values) files — plain text files that store tabular data with commas between the values — do statistical analysis, create charts, and process big data. These collections of pre-written code are called **libraries** (in Python) or **packages** (in R), though the two words are often used interchangeably.
 
 For example, `pandas` is a Python library for working with tabular data (think spreadsheets). `ggplot2` is an R package for creating charts. Instead of writing hundreds of lines of code to read a CSV file and compute an average, you `import pandas` and do it in two lines.
 
@@ -128,9 +132,7 @@ This is where **environments** come in. An environment is an isolated container 
 
 **Micromamba** is the tool we use to create and manage environments. It is a fast, lightweight alternative to the more well-known tools **conda** and **Anaconda**.
 
-You may have heard of Anaconda — it is a popular distribution that bundles Python, R, hundreds of libraries, and a graphical interface. The problem with Anaconda is that it is enormous (several gigabytes) and installs many things you may never use. **Conda** is the command-line tool inside Anaconda, and it works well, but it can be slow when solving which versions of libraries are compatible with each other.
-
-Micromamba does the same job as conda — it creates environments, installs libraries, manages versions — but it is much faster and much smaller. It downloads packages from the same sources (called **channels**, the main one being `conda-forge`), so you get access to the same libraries. The experience is nearly identical: where a tutorial says `conda install pandas`, you would type `micromamba install pandas`.
+You may have heard of **conda** or **Anaconda** — these are older, more well-known tools that do the same job. Micromamba is faster and lighter, but uses the same package sources (called **channels**, the main one being `conda-forge`), so you get access to the same libraries. Where a tutorial says `conda install pandas`, you would type `micromamba install pandas`.
 
 In this repo, the file `environment.yml` lists everything the `codingcs` environment needs: Python, R, data analysis libraries, and big data tools. After you install micromamba, a single command — `micromamba create -f environment.yml` — sets up the entire environment. No hunting for download links, no version conflicts.
 
@@ -140,23 +142,23 @@ In this repo, the file `environment.yml` lists everything the `codingcs` environ
 
 A **Jupyter notebook** is a document that combines code, text, and output in a single file. Unlike a plain script (which is just code), a notebook lets you mix written explanations with executable code blocks and their results — tables, charts, numbers, error messages — all in one place.
 
-A notebook is made of **cells**. Each cell is either a **code cell** (where you write and run code) or a **Markdown cell** (where you write formatted text — headings, lists, bold, italics, links). You run cells one at a time, in any order, and each cell's output appears directly below it. This makes notebooks ideal for data analysis, because you can load a dataset, explore it step by step, visualize it, and write your interpretation — all in the same document.
+A notebook is made of **cells**. Each cell is either a **code cell** (where you write and run code) or a **Markdown cell** (where you write formatted text using **Markdown**, a simple formatting language for headings, bold, lists, and links). You run cells one at a time, in any order, and each cell's output appears directly below it. This makes notebooks ideal for data analysis, because you can load a dataset, explore it step by step, visualize it, and write your interpretation — all in the same document.
 
 Jupyter notebooks support multiple programming languages through **kernels**. A kernel is the engine that actually runs your code. When you open a notebook, you choose a kernel — for example, a Python kernel or an R kernel. The kernel runs in the background, executes whatever you type in code cells, and sends the results back to the notebook. In this repo, you will use both Python and R kernels in different notebooks.
 
+A kernel does not appear automatically just because Python or R is installed. It requires a small bridge package that registers the language with Jupyter. For Python, this package is called **ipykernel**. For R, it is called **IRkernel**. Both are included in this repo's `environment.yml`, so they are installed automatically when you create the `codingcs` environment. When you open a notebook in VS Code and click "Select Kernel," you are choosing which environment's Python or R should run your code. You should always select the one labeled `codingcs` — that is the environment with all the libraries the notebooks need.
+
 The name "Jupyter" comes from three languages: **Ju**lia, **Py**thon, and **R**. Even though it started as a Python tool, it was designed from the beginning to be language-agnostic.
+
+### Notebooks vs. scripts
+
+Notebooks are not the only way to run code. A **script** is a plain text file (`.py` for Python, `.R` for R) that contains code and nothing else — no cells, no inline output, no markdown. When you run a script, the language executes every line from top to bottom and exits. Scripts are the right choice for automation, batch processing, and any task that needs to run unattended or on a schedule. Many real workflows start as notebooks (for exploration) and graduate to scripts (for production). The basics notebooks in this repo include a hands-on section where you create and run a script, so you can experience the difference firsthand.
 
 ---
 
 ## 10. Servers in the Jupyter and Spark Context
 
-The word "server" might make you think of a large machine humming in a data center. In the context of Jupyter and Spark, it means something more specific — and it is usually running right on your own laptop.
-
-When you open a Jupyter notebook, your computer starts a small **Jupyter server** in the background. This server is a program that manages your notebooks: it loads them, sends your code to the kernel for execution, and returns the results to your screen. You interact with the notebook through a web browser or through VS Code, but behind the scenes the server is doing the work. When we say "start the Jupyter server," we just mean "run the program that makes notebooks work." It lives on your computer, it is not on the internet, and it shuts down when you close it.
-
-**Apache Spark** uses the word "server" in a similar but broader way. Spark is a framework for processing very large datasets — data too big to fit in your computer's memory. It works by splitting the data into pieces and processing those pieces in parallel. In a production setting, Spark runs across many machines (a **cluster**): one machine acts as the **driver** (the coordinator) and the others act as **workers** (they do the actual computation). When you are learning on your laptop, Spark runs in **local mode** — your laptop plays the role of both the driver and the workers. The architecture is the same, but everything happens on one machine.
-
-Understanding this architecture matters because when you eventually work with real big data — datasets with millions or billions of rows — you will use Spark on an actual cluster of machines. The code you write locally will be almost identical to the code you run on a cluster. Learning Spark locally is direct preparation for working at scale.
+When you run a Jupyter notebook or start Spark, your computer launches small background programs — a **Jupyter server** that manages your notebooks and sends code to the kernel, and (for Spark) a **driver** that coordinates data processing. On your laptop, everything runs locally. In production, Spark distributes work across many machines (a **cluster**), but the code you write is nearly identical. The Spark notebooks in this repo explain the architecture hands-on when you encounter it.
 
 ---
 
@@ -182,7 +184,12 @@ None of these tools works alone. Together, they form the standard toolkit for da
 codingCS/
 ├── README.md                 <- You are here
 ├── SETUP.md                  <- Step-by-step installation and setup guide
+├── AI-TOOLS.md               <- Guide to using Claude Code as a coding companion
+├── CONTRIBUTING.md            <- How to contribute via issues and pull requests
+├── GITHUB-PROJECTS.md         <- Task and milestone tracking with GitHub Projects
+├── STARTING-A-PROJECT.md      <- How to start a new project with documentation
 ├── environment.yml           <- Environment specification (Python + R + big data tools)
+├── .gitignore                <- Files and folders git should ignore
 ├── data/
 │   ├── README.md             <- Dataset descriptions
 │   ├── employees.csv         <- 50-row synthetic employee dataset
@@ -209,15 +216,25 @@ codingCS/
 
 The `python/` and `r/` folders each contain the same progression of topics. You can work through one language or both — the concepts transfer.
 
+### Python or R?
+
+Both languages can do the same core work: load data, clean it, analyze it, visualize it, and produce reports. The choice between them comes down to strengths, ecosystem, and — ultimately — personal preference.
+
+**Python** is a general-purpose language that happens to be excellent at data analysis. Its strengths are versatility (you can build web apps, automate tasks, train machine learning models, and analyze data all in the same language), a massive ecosystem of libraries (pandas, scikit-learn, TensorFlow), and syntax that reads almost like English. Python tends to dominate in tech companies, machine learning, and software engineering contexts.
+
+**R** was built specifically for statistics and data analysis. Its strengths are in statistical modeling (built-in support for regressions, hypothesis tests, and distributions), publication-quality visualization (ggplot2 is widely considered the best charting library in any language), and a deep ecosystem for academic and scientific work. R tends to dominate in academia, biostatistics, economics, and any field where statistical rigor is the priority.
+
+In practice, many data professionals know both and pick whichever fits the task. If your team uses one, use that one. If you are starting fresh and unsure, either is a fine choice — the analytical thinking transfers completely. This repo teaches both so you can compare and decide for yourself.
+
 ---
 
 ## Next Steps
 
 1. **Install everything:** Follow [SETUP.md](SETUP.md) for step-by-step instructions.
-2. **Start with the basics:** Open `python/01-python-basics.ipynb` or `r/01-r-basics.ipynb`.
-3. **Work your way up:** The notebooks are numbered in the order you should tackle them.
-4. **Organize your work:** Read [GITHUB-PROJECTS.md](GITHUB-PROJECTS.md) to learn how to track tasks, milestones, and progress with GitHub Projects.
-5. **Contribute:** Found a mistake or have a suggestion? Read [CONTRIBUTING.md](CONTRIBUTING.md) to learn how to open issues and pull requests.
-6. **Start your own project:** Read [STARTING-A-PROJECT.md](STARTING-A-PROJECT.md) to learn how to set up a new repo, write documentation, and use Claude as a collaborator.
-7. **Use AI effectively:** Read [AI-TOOLS.md](AI-TOOLS.md) to learn how Claude Code works, how to stay in control, and how to use AI as augmentation rather than automation.
+2. **Use AI as you learn:** Read [AI-TOOLS.md](AI-TOOLS.md) to learn how Claude Code works and how to use it as a companion while working through the notebooks.
+3. **Start with the basics:** Open `python/01-python-basics.ipynb` or `r/01-r-basics.ipynb`.
+4. **Work your way up:** The notebooks are numbered in the order you should tackle them.
+5. **Organize your work:** Read [GITHUB-PROJECTS.md](GITHUB-PROJECTS.md) to learn how to track tasks, milestones, and progress with GitHub Projects.
+6. **Contribute:** Found a mistake or have a suggestion? Read [CONTRIBUTING.md](CONTRIBUTING.md) to learn how to open issues and pull requests.
+7. **Start your own project:** Read [STARTING-A-PROJECT.md](STARTING-A-PROJECT.md) to learn how to set up a new repo, write documentation, and use Claude as a collaborator.
 8. **Experiment:** Change the code, break things, fix them. That is how you learn.

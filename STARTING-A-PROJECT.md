@@ -13,7 +13,7 @@ At some point you will move beyond following tutorials and start your own data a
 5. [Why Documentation Matters More Than You Think](#5-why-documentation-matters-more-than-you-think)
 6. [Using Claude as a Collaborator](#6-using-claude-as-a-collaborator)
 7. [Other Documentation Files Worth Having](#7-other-documentation-files-worth-having)
-8. [Bringing It All Together: The Tools in This Repo](#8-bringing-it-all-together-the-tools-in-this-repo)
+8. [Bringing It All Together](#8-bringing-it-all-together)
 9. [A Template for Your First Project](#9-a-template-for-your-first-project)
 
 ---
@@ -262,27 +262,9 @@ You don't need all of these on day one. Start with `README.md`, `environment.yml
 
 ---
 
-## 8. Bringing It All Together: The Tools in This Repo
+## 8. Bringing It All Together
 
-This repository — `codingCS` — was built to give you a foundation. Here is how each piece connects to real project work:
-
-| What you learned here | How it helps in your own projects |
-|-----------------------|-----------------------------------|
-| **Terminal and bash** ([README.md](README.md)) | You navigate files, run scripts, and manage git from the terminal. It is the control center for everything. |
-| **Git and GitHub** ([README.md](README.md)) | Every project lives in a repo. Version control means you never lose work and can always undo mistakes. |
-| **GitHub credentials and SSH** ([SETUP.md](SETUP.md)) | Lets you push and pull code seamlessly, no repeated logins. |
-| **VS Code and workspace settings** ([SETUP.md](SETUP.md)) | Your daily workspace — notebooks, terminal, git, and extensions in one window. The workspace settings keep your environment paths and preferences organized per project. |
-| **Micromamba and environments** ([SETUP.md](SETUP.md)) | Each project gets its own isolated environment. No dependency conflicts, and anyone can reproduce your setup from `environment.yml`. |
-| **Python fundamentals** (`python/01-python-basics.ipynb`) | The language you will write most of your analysis in. Variables, loops, functions, pandas — the core toolkit. |
-| **R fundamentals** (`r/01-r-basics.ipynb`) | A second language strong in statistics and visualization. Knowing both makes you versatile. |
-| **Big data tools** (`python/02-05`, `r/02-05`) | When your data outgrows pandas or base R, you have PySpark, Dask, DuckDB, Arrow, and sparklyr ready. Knowing which tool fits which problem saves hours. |
-| **Visualization** (`python/06`, `r/06`) | Charts communicate findings. matplotlib, seaborn, and ggplot2 cover most needs. |
-| **Reports** (`python/07`, `r/07`) | A Jupyter notebook is a report: narrative, code, and output in one document. You learned how to structure and export them. |
-| **GitHub Projects** ([GITHUB-PROJECTS.md](GITHUB-PROJECTS.md)) | Track tasks, set milestones, and see progress at a glance. Essential when a project has more than a handful of tasks. |
-| **Contributing and pull requests** ([CONTRIBUTING.md](CONTRIBUTING.md)) | Collaborate without stepping on each other's work. Issues for communication, branches for isolation, PRs for review. |
-| **Documentation and Claude** (this guide) | Good documentation makes your project understandable, reproducible, and AI-friendly. |
-
-None of these tools exists in isolation. A typical workday might look like: open VS Code, activate your environment, pull the latest changes from GitHub, open a notebook, write some analysis, commit your work, update the project board, and push. The tools form a pipeline, and fluency with each one multiplies the value of the others.
+Every tool introduced in [README.md](README.md) — the terminal, git, VS Code, environments, Jupyter — plays a role when you start your own project. The setup and workflow patterns you practiced in this repository transfer directly to any new project you create. A typical workday might look like: open VS Code, activate your environment, pull the latest changes from GitHub, open a notebook, write some analysis, commit your work, and push. The tools form a pipeline, and fluency with each one multiplies the value of the others.
 
 ---
 
