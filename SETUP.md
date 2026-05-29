@@ -12,6 +12,7 @@ Before you start, make sure you have:
 - macOS Sequoia or later
 - Admin access (you can install software on this Mac)
 - A GitHub account — if you don't have one yet, create one at https://github.com/signup
+- A Claude Pro account (or higher) — required for Claude Code (Step 11). Subscribe at https://claude.ai
 
 ---
 
@@ -411,6 +412,8 @@ You can verify by clicking the Source Control icon in the left sidebar (it looks
 > **Already have it?** Run `claude --version`. If it prints a version number, skip to [Step 12](#step-12-generate-the-large-dataset).
 
 Claude Code is an AI coding assistant that runs in your terminal. It can read your project files, explain code, help debug errors, and propose edits — all from the command line. See [AI-TOOLS.md](AI-TOOLS.md) for a full guide on how and why to use it.
+
+**You need a Claude Pro account (or higher) to use Claude Code.** Claude Code is included with Claude Pro ($20/month), Max, and Team subscriptions at [claude.ai](https://claude.ai). If you do not have one yet, create an account and subscribe before continuing. Without a paid subscription, you can install Claude Code but it will not be able to start a session.
 
 ### 11a. Install from Homebrew
 

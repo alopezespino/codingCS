@@ -81,7 +81,7 @@ Claude Code is a command-line AI assistant made by Anthropic. It runs in your te
 
 It works as a conversation. You describe what you need in plain language, and Claude proposes actions — edits to files, commands to run, explanations of concepts. Critically, **you approve every action before it happens.** Claude does not silently change your files or run commands behind your back.
 
-For installation instructions, see [SETUP.md](SETUP.md).
+**Requirement:** Claude Code is included with a Claude Pro subscription ($20/month) or higher. You will need a paid account at [claude.ai](https://claude.ai) to use it. For installation instructions, see [SETUP.md](SETUP.md).
 
 ---
 
