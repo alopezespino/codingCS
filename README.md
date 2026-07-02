@@ -1,6 +1,6 @@
 # codingCS: Getting Started with Data Analysis Tools
 
-This repository is a self-paced introduction to the tools you will use as a data analyst or data scientist. It is designed for someone who has never programmed before and is working on a Mac. By the time you finish, you will understand the software ecosystem that powers modern data work, and you will have hands-on practice with Python, R, and several big data technologies.
+This repository is a self-paced introduction to the tools you will use as a data analyst or data scientist. **It is designed for someone who has never programmed before and is working on a Mac.** By the time you finish, you will understand the software ecosystem that powers modern data work, and you will have hands-on practice with Python, R, and several big data technologies.
 
 Everything here is structured so you can learn by doing. Read this guide first to understand what each tool is and why it exists, then follow [SETUP.md](SETUP.md) to install everything you need. Before starting the notebooks, read [AI-TOOLS.md](AI-TOOLS.md) to learn how to use Claude Code as an AI companion while you work with this repository — it will help you debug errors, understand code, and move through the material faster.
 
