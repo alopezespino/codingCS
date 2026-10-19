@@ -26,11 +26,13 @@ You will see a window with a blinking cursor. This is where you type commands. D
 
 ---
 
-## Step 2: Set Bash as Your Default Shell
+## Step 2: Set Bash as Your Default Shell (Optional)
 
 > **Already using bash?** Run `echo $SHELL`. If it prints `/bin/bash`, skip to [Step 3](#step-3-install-homebrew).
 
-Modern Macs use **zsh** as the default shell, but many data science tools, servers, and tutorials assume **bash**. Bash and zsh are very similar, but using bash avoids subtle compatibility issues down the road. We will make bash the default everywhere: in Terminal and in VS Code.
+> **Want to keep zsh?** This step is optional: skip to [Step 3](#step-3-install-homebrew). Wherever a command in this guide differs between bash and zsh, the zsh version comes right after the bash one, under the label **If you use zsh:**. Commands without a zsh version work unchanged in both shells.
+
+Modern Macs use **zsh** as the default shell, but many data science tools, servers, HPC clusters, and tutorials assume **bash**. Bash and zsh are very similar, but using bash avoids subtle compatibility issues down the road. If you choose bash, this step and Step 10d make it the default everywhere: in Terminal and in VS Code.
 
 ### 2a. Change the systemwide default
 
@@ -69,6 +71,8 @@ Paste this into your terminal and press Enter:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
 
+This command runs the installer with bash (`/bin/bash -c`), so it works unchanged if your shell is zsh.
+
 It will ask for your Mac password again. Type it and press Enter.
 
 **Important — add Homebrew to your PATH.** Your PATH is an **environment variable** (a system-wide setting stored as text) that lists the locations your terminal checks when you type a command. Adding Homebrew to it lets you type `brew` from anywhere. After installation finishes, Homebrew will print instructions. For Apple Silicon Macs, run these commands:
@@ -79,7 +83,15 @@ echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
-This tells your terminal where to find Homebrew. It writes to `~/.bash_profile` so the setting persists across terminal sessions.
+**If you use zsh:**
+
+```zsh
+echo >> ~/.zprofile
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+```
+
+This tells your terminal where to find Homebrew. It writes to `~/.bash_profile` (`~/.zprofile` in zsh) so the setting persists across terminal sessions.
 
 **Verify it worked:**
 
@@ -182,16 +194,28 @@ Micromamba is an environment manager. It creates isolated "environments" where y
 brew install micromamba
 ```
 
-Initialize micromamba for bash:
+Initialize micromamba for your shell:
 
 ```bash
 micromamba shell init -s bash
 ```
 
+**If you use zsh:**
+
+```zsh
+micromamba shell init -s zsh
+```
+
 Restart your terminal by closing the window and opening a new one, or run:
 
 ```bash
-source ~/.bashrc
+source ~/.bash_profile
+```
+
+**If you use zsh:**
+
+```zsh
+source ~/.zshrc
 ```
 
 **Verify:**
@@ -260,7 +284,7 @@ This registers the R kernel in your user-level Jupyter directory, where VS Code 
 
 ## Step 10: Configure VS Code
 
-This step sets up VS Code for this project: extensions, bash terminal, GitHub integration, and workspace settings. Make sure your environment is active (`(codingcs)` in your prompt) before continuing.
+This step sets up VS Code for this project: extensions, terminal shell, GitHub integration, and workspace settings. Make sure your environment is active (`(codingcs)` in your prompt) before continuing.
 
 ### 10a. Find your environment paths
 
@@ -326,6 +350,8 @@ When VS Code opens the workspace, it will suggest installing recommended extensi
 
 ### 10d. Set bash as the default terminal in VS Code
 
+> **If you use zsh:** skip this step. VS Code's terminal opens your default shell, which is already zsh.
+
 VS Code has its own built-in terminal. By default it may use zsh. To make it use bash (matching what we set up system-wide):
 
 1. Press `Cmd + Shift + P` to open the Command Palette
@@ -381,6 +407,19 @@ Now create `.vscode/settings.json`. **Replace the two paths below** with the out
 cat > .vscode/settings.json << 'EOF'
 {
     "terminal.integrated.defaultProfile.osx": "bash",
+    "python.defaultInterpreterPath": "/Users/yourname/micromamba/envs/codingcs/bin/python",
+    "r.rterm.mac": "/Users/yourname/micromamba/envs/codingcs/bin/R",
+    "jupyter.jupyterServerType": "local"
+}
+EOF
+```
+
+**If you use zsh:**
+
+```zsh
+cat > .vscode/settings.json << 'EOF'
+{
+    "terminal.integrated.defaultProfile.osx": "zsh",
     "python.defaultInterpreterPath": "/Users/yourname/micromamba/envs/codingcs/bin/python",
     "r.rterm.mac": "/Users/yourname/micromamba/envs/codingcs/bin/R",
     "jupyter.jupyterServerType": "local"
@@ -488,7 +527,7 @@ If you see multiple Python options, pick the one whose path includes `codingcs`.
 ### Test the terminal
 
 1. Press `` Ctrl + ` `` (backtick) to open the integrated terminal in VS Code
-2. You should see a bash prompt (ending with `$`)
+2. You should see a bash prompt (ending with `$`), or a zsh prompt (ending with `%`) if you kept zsh
 3. Run `micromamba activate codingcs` and then `python --version` — it should print a Python 3.x version
 
 If all three work, you are ready to go. Before diving into the notebooks, read [AI-TOOLS.md](AI-TOOLS.md) to learn how to use Claude Code as a companion while you work. Then start with notebook `01` in either the `python/` or `r/` folder and work your way through the numbers.
@@ -503,6 +542,13 @@ Homebrew was installed but your terminal does not know where it is. Run:
 
 ```bash
 echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.bash_profile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+```
+
+**If you use zsh:**
+
+```zsh
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
