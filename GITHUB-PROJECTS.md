@@ -56,7 +56,7 @@ You create issues in a repository. For example, in your project repo you might c
 | #3 | Create revenue-by-region chart | You |
 | #4 | Draft report introduction | Your supervisor |
 
-Issues are more than a to-do list. They are connected to your code. When you make a commit that finishes a task, you can write `closes #1` in the commit message and GitHub will automatically close that issue. This creates a clear trail: you can always trace back from a completed task to the exact code change that accomplished it.
+Issues are more than a to-do list. They are connected to your code. When you make a commit that finishes a task, you can write `closes #1` in the commit message and GitHub will automatically close that issue. The issue closes only when that commit reaches the repository's default branch (usually `main`), either because you push it to `main` directly or because a pull request that contains it is merged. This creates a clear trail: you can always trace back from a completed task to the exact code change that accomplished it.
 
 ---
 
