@@ -194,6 +194,7 @@ codingCS/
 ├── STARTING-A-PROJECT.md      <- How to start a new project with documentation
 ├── environment.yml           <- Environment specification (Python + R + big data tools)
 ├── .gitignore                <- Files and folders git should ignore
+├── admin/                    <- Private working folder of the maintainer; never committed
 ├── data/
 │   ├── README.md             <- Dataset descriptions
 │   ├── employees.csv         <- 50-row synthetic employee dataset
